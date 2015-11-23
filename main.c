@@ -1,4 +1,7 @@
-// This is where the imports go
+#include "stdio.h"
+#include "stdlib.h"
+
+#include "functions.h"
 
 // Main
 // bleh bleh 
