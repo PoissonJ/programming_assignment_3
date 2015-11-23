@@ -1,0 +1,33 @@
+main.c
+Main:
+
+Struct Student
+ - First Name
+ - Last Name
+ - Student ID
+ - Math Grade
+ - Music Grade
+ - PE Grade
+
+typedef struct Student
+
+Student student_array[100]
+
+Scan in input, switch statement, read the rest
+
+
+
+
+functions.c
+void student_mean(student * struct)
+
+Functions
+ - Add
+ - List
+ - Print
+ - Mean
+ - Delete
+ - Quit
+ - Import
+ - Export
+
