@@ -31,3 +31,7 @@ Functions
  - Import
  - Export
 
+
+Additional help:
+- http://www.cprogramming.com/tutorial/c/lesson7.html
+- http://www.cs.utexas.edu/users/fussell/cs310h/lectures/Lecture_18-310h.pdf
