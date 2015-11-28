@@ -1,5 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
+#include "string.h"
 
 // Student Struct
 typedef struct student{
@@ -11,67 +12,78 @@ typedef struct student{
     float pe_grade;
 } Student;
 
+
+/*----Globals----*/
 Student student_array[100];
 
-int i = 0;
-int i_max = 0;
-//int stud_id;
+int student_count = 0;
+/*---------------*/
 
-void read_data(int i_max); /* dummy test function*/
-//void delete();
-//void export();
-//void goodstanding();
-//void import();
-void list_data(int i_max); /* dummy test function*/
+
+/*---Functions--*/
+void add_student(char first_name[50] , char last_name[50], int id,
+                 float math_grade, float music_grade, float pe_grade);
+void export_data();
+void goodstanding();
+void import_data();
+void list_students(); /* dummy test function*/
+void mean();
 void print_data(int stud_id);
+void read_data(int i_max); /* dummy test function*/
+void remove();
 void search();
+/*--------------*/
 
 int main(void) {
 
     char choice;
 
-    for(;;){
+    for(;;) {
+
     scanf("%1c", &choice);
 
     switch(choice){
         case 'A':
-            i_max = i;
-            i++;
-            read_data(i_max);
+            char first_name[50];
+            char last_name[50];
+            int id;
+            float math_grade;
+            float music_grade;
+            float pe_grade;
+            scanf(" %s %s %d %f %f %f", first_name, last_name, &id,
+                                        &math_grade, &music_grade, &pe_grade
+                 );
+
+            add_student(first_name, last_name, id, math_grade, music_grade, pe_grade);
             break;
-        /*case 'D':
-            delete();
-            break;*/
-        /*case 'E':
-            export();
-            break;*/
-        /*case 'G':
-            goodstanding();
-            break;*/
-        /*case 'I':
-            import();
-            break;*/
+        /*case 'D':*/
+            /*remove();*/
+            /*break;*/
+        /*case 'E':*/
+            /*export_data();*/
+            /*break;*/
+        /*case 'G':*/
+            /*goodstanding();*/
+            /*break;*/
+        /*case 'I':*/
+            /*import_data();*/
+            /*break;*/
         case 'L':
-            list_data(i_max);
+            list_students();
             break;
-        /*case 'M':
-            mean();
-            break;*/
-        /*case 'P':
-            print_data(stud_id);
-            break;*/
+        /*case 'M':*/
+            /*mean();*/
+            /*break;*/
+        /*case 'P':*/
+            /*print_data(stud_id);*/
+            /*break;*/
         case 'Q':
             goto quit;
             break;
-        /*case 'S':
-            search();
-            break;*/
+        /*case 'S':*/
+            /*search();*/
+            /*break;*/
         }
-
-        /*if(choice == 'A'){
-         scanf(" %s %s %d %d %d %d", student_array[i].first_name, student_array[i].last_name, &student_array[i].id, &student_array[i].math_grade, &student_array[i].music_grade, &student_array[i].pe_grade);
-         printf("\n%s %s %d %d %d %d\n", student_array[i].first_name, student_array[i].last_name, student_array[i].id, student_array[i].math_grade, student_array[i].music_grade, student_array[i].pe_grade);
-         }*/
     }
 
 quit: ;
@@ -79,25 +91,34 @@ quit: ;
     return 0;
 }
 
-void read_data(int i_max)
-{
-    //int i = 0;
+// Create new student and add to student array
+void add_student(char first_name[50] , char last_name[50], int id,
+                 float math_grade, float music_grade, float pe_grade) {
 
-    scanf(" %s %s %d %f %f %f", student_array[i_max].first_name, student_array[i_max].last_name, &student_array[i_max].id, &student_array[i_max].math_grade, &student_array[i_max].music_grade, &student_array[i_max].pe_grade);
+    strcpy(student_array[student_count].first_name, first_name);
+    strcpy(student_array[student_count].last_name, last_name);
+    student_array[student_count].id = id;
+    student_array[student_count].math_grade = math_grade;
+    student_array[student_count].music_grade = music_grade;
+    student_array[student_count].pe_grade = pe_grade;
+
+    student_count++;
+
 }
 
-void list_data(int i_max)
-{
-    //int i = 0;
-
-    for(i = 0; i <= i_max; i++){
+void list_students() {
+    for(int i = 0; i < student_count; i++){
         printf("%s %s [%d]:\n", student_array[i].first_name, student_array[i].last_name, student_array[i].id);
         printf("        MATH:   %4.2f\n", student_array[i].math_grade);
         printf("        MUSIC:  %4.2f\n", student_array[i].music_grade);
         printf("        PE:     %4.2f\n", student_array[i].pe_grade);
         printf("                %4.2f\n", (student_array[i].math_grade + student_array[i].music_grade + student_array[i].pe_grade)/3.0f);
     }
-
-
-    /*printf("\n%s %s %d %d %d %d\n", student_array[i].first_name, student_array[i].last_name, student_array[i].id, student_array[i].math_grade, student_array[i].music_grade, student_array[i].pe_grade);*/
 }
+
+void export_data() {}
+void goodstanding() {}
+void import_data() {}
+void print_data() {}
+void remove() {}
+void search() {}
