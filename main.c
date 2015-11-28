@@ -24,6 +24,7 @@ int student_count = 0;
 void add_student(char first_name[50] , char last_name[50], int id,
                  float math_grade, float music_grade, float pe_grade);
 void export_data();
+void generic_print(int i);
 void goodstanding();
 void import_data();
 void list_students(); /* dummy test function*/
@@ -111,11 +112,7 @@ void add_student(char first_name[50] , char last_name[50], int id,
 // List all created students
 void list_students() {
     for(int i = 0; i < student_count; i++){
-        printf("%s %s [%d]:\n", student_array[i].first_name, student_array[i].last_name, student_array[i].id);
-        printf("        MATH:   %4.2f\n", student_array[i].math_grade);
-        printf("        MUSIC:  %4.2f\n", student_array[i].music_grade);
-        printf("        PE:     %4.2f\n", student_array[i].pe_grade);
-        printf("                %4.2f\n", (student_array[i].math_grade + student_array[i].music_grade + student_array[i].pe_grade)/3.0f);
+        generic_print(i);
     }
 }
 
@@ -147,14 +144,19 @@ void mean() {
 void print_student(int student_id) {
     for (int i = 0; i < student_count; i++) {
         if (student_array[i].id == student_id) {
-            printf("%s %s [%d]:\n", student_array[i].first_name, student_array[i].last_name, student_array[i].id);
-            printf("        MATH:   %4.2f\n", student_array[i].math_grade);
-            printf("        MUSIC:  %4.2f\n", student_array[i].music_grade);
-            printf("        PE:     %4.2f\n", student_array[i].pe_grade);
-            printf("                %4.2f\n", (student_array[i].math_grade + student_array[i].music_grade + student_array[i].pe_grade)/3.0f);
+            generic_print(i);
         }
     }
 }
 
 void remove() {}
 void search() {}
+
+// This functions handles all of the generic printing
+void generic_print(int i) {
+    printf("%s %s [%d]:\n", student_array[i].first_name, student_array[i].last_name, student_array[i].id);
+    printf("        MATH:   %4.2f\n", student_array[i].math_grade);
+    printf("        MUSIC:  %4.2f\n", student_array[i].music_grade);
+    printf("        PE:     %4.2f\n", student_array[i].pe_grade);
+    printf("                %4.2f\n", (student_array[i].math_grade + student_array[i].music_grade + student_array[i].pe_grade)/3.0f);
+}
