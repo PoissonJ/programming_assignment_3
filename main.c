@@ -28,7 +28,7 @@ void goodstanding();
 void import_data();
 void list_students(); /* dummy test function*/
 void mean();
-void print_data(int stud_id);
+void print_student(int student_id);
 void read_data(int i_max); /* dummy test function*/
 void remove();
 void search();
@@ -74,9 +74,11 @@ int main(void) {
         /*case 'M':*/
             /*mean();*/
             /*break;*/
-        /*case 'P':*/
-            /*print_data(stud_id);*/
-            /*break;*/
+        case 'P':
+            int student_id;
+            scanf(" %d", &student_id);
+            print_student(student_id);
+            break;
         case 'Q':
             goto quit;
             break;
@@ -119,6 +121,18 @@ void list_students() {
 void export_data() {}
 void goodstanding() {}
 void import_data() {}
-void print_data() {}
+
+void print_student(int student_id) {
+    for (int i = 0; i < student_count; i++) {
+        if (student_array[i].id == student_id) {
+            printf("%s %s [%d]:\n", student_array[i].first_name, student_array[i].last_name, student_array[i].id);
+            printf("        MATH:   %4.2f\n", student_array[i].math_grade);
+            printf("        MUSIC:  %4.2f\n", student_array[i].music_grade);
+            printf("        PE:     %4.2f\n", student_array[i].pe_grade);
+            printf("                %4.2f\n", (student_array[i].math_grade + student_array[i].music_grade + student_array[i].pe_grade)/3.0f);
+        }
+    }
+}
+
 void remove() {}
 void search() {}
