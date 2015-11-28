@@ -32,7 +32,7 @@ void mean();
 void print_student(int student_id);
 void read_data(int i_max); /* dummy test function*/
 void remove();
-void search();
+void search(char search_string[50]);
 /*--------------*/
 
 int main(void) {
@@ -83,9 +83,11 @@ int main(void) {
         case 'Q':
             goto quit;
             break;
-        /*case 'S':*/
-            /*search();*/
-            /*break;*/
+        case 'S':
+            char search_string[50];
+            scanf(" %s", search_string);
+            search(search_string);
+            break;
         }
     }
 
@@ -150,7 +152,15 @@ void print_student(int student_id) {
 }
 
 void remove() {}
-void search() {}
+void search(char search_string[50]) {
+    for (int i = 0; i < student_count; i++) {
+        if (strstr(student_array[i].first_name, search_string) != NULL ||
+            strstr(student_array[i].last_name, search_string)  != NULL) {
+            generic_print(i);
+        }
+    }
+
+}
 
 // This functions handles all of the generic printing
 void generic_print(int i) {
