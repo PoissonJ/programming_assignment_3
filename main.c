@@ -63,12 +63,13 @@ int main(void) {
             add_student(first_name, last_name, id, math_grade, music_grade, pe_grade);
             break;
         case 'D':
-            scanf(" %s%d", search_string, &id);
-            if (strlen(search_string) != 0) {
-                remove_student(search_string);
-            } else {
-                printf("here\n");
+            scanf(" %s", search_string);
+            if (atoi(search_string) != 0) {
+                // Input was a number
                 remove_student(id);
+            } else {
+                // Input was not a number
+                remove_student(search_string);
             }
             break;
         /*case 'E':*/
