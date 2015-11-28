@@ -101,7 +101,7 @@ int main(void) {
         }
     }
 
-quit: ;
+quit:
 
     return 0;
 }
