@@ -31,7 +31,8 @@ void list_students(); /* dummy test function*/
 void mean();
 void print_student(int student_id);
 void read_data(int i_max); /* dummy test function*/
-void remove();
+void remove_student(char search_string[50]);
+void remove_student(int id);
 void search(char search_string[50]);
 /*--------------*/
 
@@ -44,22 +45,32 @@ int main(void) {
     scanf("%1c", &choice);
 
     switch(choice){
+        // Declare variables
+        char first_name[50];
+        char last_name[50];
+        int id;
+        float math_grade;
+        float music_grade;
+        float pe_grade;
+
+        char search_string[50];
+        int student_id;
+
         case 'A':
-            char first_name[50];
-            char last_name[50];
-            int id;
-            float math_grade;
-            float music_grade;
-            float pe_grade;
             scanf(" %s %s %d %f %f %f", first_name, last_name, &id,
                                         &math_grade, &music_grade, &pe_grade
                  );
-
             add_student(first_name, last_name, id, math_grade, music_grade, pe_grade);
             break;
-        /*case 'D':*/
-            /*remove();*/
-            /*break;*/
+        case 'D':
+            scanf(" %s%d", search_string, &id);
+            if (strlen(search_string) != 0) {
+                remove_student(search_string);
+            } else {
+                printf("here\n");
+                remove_student(id);
+            }
+            break;
         /*case 'E':*/
             /*export_data();*/
             /*break;*/
@@ -76,7 +87,6 @@ int main(void) {
             mean();
             break;
         case 'P':
-            int student_id;
             scanf(" %d", &student_id);
             print_student(student_id);
             break;
@@ -84,7 +94,6 @@ int main(void) {
             goto quit;
             break;
         case 'S':
-            char search_string[50];
             scanf(" %s", search_string);
             search(search_string);
             break;
@@ -151,7 +160,78 @@ void print_student(int student_id) {
     }
 }
 
-void remove() {}
+void remove_student(char search_string[50]) {
+    for (int i = 0; i < student_count; i++) {
+        if (strstr(student_array[i].first_name, search_string) != NULL ||
+            strstr(student_array[i].last_name, search_string)  != NULL) {
+
+            Student blank_student = {0};
+
+            // Check if student is the last student inserted, if so we can
+            // remove safely
+            if (i == student_count - 1) {
+                student_array[i] = blank_student;
+                student_count--;
+            } else {
+
+                // If student was not the last inserted, we need to shift all the
+                // other students over
+
+                // Remove the student
+                student_array[i] = blank_student;
+
+                // Shift other students over
+                int j = i;
+                while (j < student_count - 1) {
+                    student_array[j] = student_array[j + 1];
+                    j++;
+                }
+
+                // Delete the last student (they are now a duplicate)
+                student_array[j] = blank_student;
+
+                // Decrement student count
+                student_count--;
+            }
+        }
+    }
+}
+void remove_student(int id) {
+    for (int i = 0; i < student_count; i++) {
+        if (student_array[i].id == id) {
+
+            Student blank_student = {0};
+
+            // Check if student is the last student inserted, if so we can
+            // remove safely
+            if (i == student_count - 1) {
+                student_array[i] = blank_student;
+                student_count--;
+            } else {
+
+                // If student was not the last inserted, we need to shift all the
+                // other students over
+
+                // Remove the student
+                student_array[i] = blank_student;
+
+                // Shift other students over
+                int j = i;
+                while (j < student_count - 1) {
+                    student_array[j] = student_array[j + 1];
+                    j++;
+                }
+
+                // Delete the last student (they are now a duplicate)
+                student_array[j] = blank_student;
+
+                // Decrement student count
+                student_count--;
+            }
+        }
+    }
+}
+
 void search(char search_string[50]) {
     for (int i = 0; i < student_count; i++) {
         if (strstr(student_array[i].first_name, search_string) != NULL ||
