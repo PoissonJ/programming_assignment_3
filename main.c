@@ -75,9 +75,9 @@ int main(void) {
         /*case 'E':*/
             /*export_data();*/
             /*break;*/
-        /*case 'G':*/
-            /*goodstanding();*/
-            /*break;*/
+        case 'G':
+            goodstanding();
+            break;
         /*case 'I':*/
             /*import_data();*/
             /*break;*/
@@ -129,7 +129,28 @@ void list_students() {
 }
 
 void export_data() {}
-void goodstanding() {}
+void goodstanding() {
+    float total_math_points  = 0.00;
+    float total_music_points = 0.00;
+    float total_pe_points    = 0.00;
+    for (int i = 0; i < student_count; i++) {
+        total_math_points  += student_array[i].math_grade;
+        total_music_points += student_array[i].music_grade;
+        total_pe_points    += student_array[i].pe_grade;
+    }
+
+    float math_average  = total_math_points / student_count;
+    float music_average = total_music_points / student_count;
+    float pe_average    = total_pe_points / student_count;
+
+    for (int i = 0; i < student_count; i++) {
+        if (student_array[i].math_grade  > math_average &&
+            student_array[i].music_grade > music_average &&
+            student_array[i].pe_grade    > pe_average) {
+            generic_print(i);
+        }
+    }
+}
 void import_data() {}
 
 // Print the means of all created students for each subject
