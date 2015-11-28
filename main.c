@@ -71,9 +71,9 @@ int main(void) {
         case 'L':
             list_students();
             break;
-        /*case 'M':*/
-            /*mean();*/
-            /*break;*/
+        case 'M':
+            mean();
+            break;
         case 'P':
             int student_id;
             scanf(" %d", &student_id);
@@ -108,6 +108,7 @@ void add_student(char first_name[50] , char last_name[50], int id,
 
 }
 
+// List all created students
 void list_students() {
     for(int i = 0; i < student_count; i++){
         printf("%s %s [%d]:\n", student_array[i].first_name, student_array[i].last_name, student_array[i].id);
@@ -121,6 +122,27 @@ void list_students() {
 void export_data() {}
 void goodstanding() {}
 void import_data() {}
+
+// Print the means of all created students for each subject
+void mean() {
+    float total_math_points  = 0.00;
+    float total_music_points = 0.00;
+    float total_pe_points    = 0.00;
+    for (int i = 0; i < student_count; i++) {
+        total_math_points  += student_array[i].math_grade;
+        total_music_points += student_array[i].music_grade;
+        total_pe_points    += student_array[i].pe_grade;
+    }
+
+    float math_average  = total_math_points / student_count;
+    float music_average = total_music_points / student_count;
+    float pe_average    = total_pe_points / student_count;
+
+    printf("        MATH:   %4.2f\n", math_average);
+    printf("        MUSIC:  %4.2f\n", music_average);
+    printf("        PE:     %4.2f\n", pe_average);
+
+}
 
 void print_student(int student_id) {
     for (int i = 0; i < student_count; i++) {
