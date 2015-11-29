@@ -72,9 +72,9 @@ int main(void) {
                 remove_student(search_string);
             }
             break;
-        /*case 'E':*/
-            /*export_data();*/
-            /*break;*/
+        case 'E':
+            export_data();
+            break;
         case 'G':
             goodstanding();
             break;
@@ -128,7 +128,19 @@ void list_students() {
     }
 }
 
-void export_data() {}
+void export_data() {
+    int i;
+    char output[100];
+    
+    for(i = 0; i < student_count; i++){
+        sprintf(output, "%s#%s#%.3d%4.0f%4.0f%4.0f", student_array[i].first_name, student_array[i].last_name, student_array[i].id, student_array[i].math_grade*100.0f, student_array[i].music_grade*100.0f, student_array[i].pe_grade*100.0f);
+        printf("%s", output);
+    }
+    /*sprintf(output, "%s#%s#%.3d%4.0f%4.0f%4.0f", student_array[0].first_name, student_array[0].last_name, student_array[0].id, student_array[0].math_grade*100.0f, student_array[0].music_grade*100.0f, student_array[0].pe_grade*100.0f);
+    printf("%s", output);*/
+    printf("\n");
+}
+
 void goodstanding() {
     float total_math_points  = 0.00;
     float total_music_points = 0.00;
