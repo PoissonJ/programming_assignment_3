@@ -78,9 +78,9 @@ int main(void) {
         case 'G':
             goodstanding();
             break;
-        /*case 'I':*/
-            /*import_data();*/
-            /*break;*/
+        case 'I':
+            import_data();
+            break;
         case 'L':
             list_students();
             break;
@@ -143,6 +143,46 @@ void export_data() {
     printf("\n");
 }
 
+void import_data() {
+    // Not sure what number to use here
+    char input_string[10000];
+    char * first_name;
+    char * last_name;
+    char * long_number;
+    char id[4];
+    char math_grade[5];
+    char music_grade[5];
+    char pe_grade[5];
+
+    scanf(" %s", input_string);
+    first_name = strtok(input_string, "#");
+    while (first_name != NULL) {
+        last_name   = strtok(NULL, "#");
+        long_number = strtok(NULL, "#");
+
+        strncpy(id, long_number, 3);
+        id[3] = '\0';
+        int id_int = atoi(id);
+
+        strncpy(math_grade, long_number+4, 4);
+        math_grade[4] = '\0';
+        float math_grade_float  = atoi(math_grade) / 100.0f;
+
+        strncpy(music_grade, long_number+8, 4);
+        music_grade[4] = '\0';
+        float music_grade_float = atoi(music_grade) / 100.0f;
+
+        strncpy(pe_grade, long_number+12, 4);
+        pe_grade[4] = '\0';
+        float pe_grade_float    = atoi(pe_grade) / 100.0f;
+
+        add_student(first_name, last_name, id_int,
+                    math_grade_float, music_grade_float, pe_grade_float);
+
+        first_name = strtok(NULL, "#");
+    }
+}
+
 void goodstanding() {
     float total_math_points  = 0.00;
     float total_music_points = 0.00;
@@ -165,7 +205,6 @@ void goodstanding() {
         }
     }
 }
-void import_data() {}
 
 // Print the means of all created students for each subject
 void mean() {
