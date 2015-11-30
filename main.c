@@ -129,10 +129,9 @@ void list_students() {
 }
 
 void export_data() {
-    int i;
     char output[100];
-    
-    for(i = 0; i < student_count; i++){
+
+    for(int i = 0; i < student_count; i++){
         sprintf(output, "%s#%s#%.3d%4.0f%4.0f%4.0f", student_array[i].first_name,
             student_array[i].last_name, student_array[i].id,
             student_array[i].math_grade*100.0f,
@@ -140,7 +139,7 @@ void export_data() {
             student_array[i].pe_grade*100.0f);
         printf("%s", output);
     }
-    
+
     printf("\n");
 }
 
