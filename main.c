@@ -132,11 +132,11 @@ void export_data() {
     char output[100];
 
     for(int i = 0; i < student_count; i++){
-        sprintf(output, "%s#%s#%.3d%4.0f%4.0f%4.0f", student_array[i].first_name,
+        sprintf(output, "%s#%s#%.3d%.4d%.4d%.4d", student_array[i].first_name,
             student_array[i].last_name, student_array[i].id,
-            student_array[i].math_grade*100.0f,
-            student_array[i].music_grade*100.0f,
-            student_array[i].pe_grade*100.0f);
+            (int)student_array[i].math_grade*100,
+            (int)student_array[i].music_grade*100,
+            (int)student_array[i].pe_grade*100);
         printf("%s", output);
     }
 
