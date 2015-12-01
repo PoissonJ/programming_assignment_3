@@ -146,6 +146,7 @@ void export_data() {
 void import_data() {
     // Not sure what number to use here
     char input_string[10000];
+    char copied_string[10000];
     char * first_name;
     char * last_name;
     char * long_number;
@@ -154,25 +155,40 @@ void import_data() {
     char music_grade[5];
     char pe_grade[5];
 
+    char delimiters[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    // TODO: PROBLEM: Cuts of delimiter
+    //
+    //
+    //
+    // possible solution:
+    // copy input string, strtok copied string to get usual variables, add
+    // length of firstname & lastname & longnumber + 2("#"'s) into a number and
+    // then concatenate original input string up to that length. Repeat.
+    // basically this will only tokenize one student at a time from the input
+    // string.
+    // UPDATE: use a string pointer of input string to chop off first n
+    // characters
+
     scanf(" %s", input_string);
     first_name = strtok(input_string, "#");
     while (first_name != NULL) {
         last_name   = strtok(NULL, "#");
-        long_number = strtok(NULL, "#");
+        long_number = strtok(NULL, delimiters);
 
         strncpy(id, long_number, 3);
         id[3] = '\0';
         int id_int = atoi(id);
 
-        strncpy(math_grade, long_number+4, 4);
+        strncpy(math_grade, long_number+3, 4);
         math_grade[4] = '\0';
         float math_grade_float  = atoi(math_grade) / 100.0f;
 
-        strncpy(music_grade, long_number+8, 4);
+        strncpy(music_grade, long_number+7, 4);
         music_grade[4] = '\0';
         float music_grade_float = atoi(music_grade) / 100.0f;
 
-        strncpy(pe_grade, long_number+12, 4);
+        strncpy(pe_grade, long_number+11, 4);
         pe_grade[4] = '\0';
         float pe_grade_float    = atoi(pe_grade) / 100.0f;
 
