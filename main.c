@@ -66,7 +66,7 @@ int main(void) {
             scanf(" %s", search_string);
             if (atoi(search_string) != 0) {
                 // Input was a number
-                remove_student(id);
+                remove_student(atoi(search_string));
             } else {
                 // Input was not a number
                 remove_student(search_string);
@@ -159,18 +159,6 @@ void import_data() {
 
     char delimiters[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    // TODO: PROBLEM: Cuts of delimiter
-    //
-    //
-    //
-    // possible solution:
-    // copy input string, strtok copied string to get usual variables, add
-    // length of firstname & lastname & longnumber + 2("#"'s) into a number and
-    // then concatenate original input string up to that length. Repeat.
-    // basically this will only tokenize one student at a time from the input
-    // string.
-    // UPDATE: use a string pointer of input string to chop off first n
-    // characters
 
     scanf(" %s", input_string);
 
