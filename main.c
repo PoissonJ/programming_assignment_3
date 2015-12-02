@@ -147,6 +147,7 @@ void import_data() {
     // Not sure what number to use here
     char input_string[10000];
     char copied_string[10000];
+    char * copied_string_ptr;
     char * first_name;
     char * last_name;
     char * long_number;
@@ -154,6 +155,7 @@ void import_data() {
     char math_grade[5];
     char music_grade[5];
     char pe_grade[5];
+    int characters_traveled = 0;
 
     char delimiters[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -171,11 +173,29 @@ void import_data() {
     // characters
 
     scanf(" %s", input_string);
+
+    // Copy input string
+    strcpy(copied_string, input_string);
+
+    // Set ptr to copied string
+    copied_string_ptr = copied_string;
+
     first_name = strtok(input_string, "#");
+
+    // Add length of first name and the "#" delimiter keep track of
+    // characters traveled in the input string
+    characters_traveled += strlen(first_name) + 1;
+
+
     while (first_name != NULL) {
         last_name   = strtok(NULL, "#");
-        long_number = strtok(NULL, delimiters);
+        characters_traveled += strlen(last_name) + 1;
 
+        long_number = strtok(NULL, delimiters);
+        characters_traveled += strlen(long_number);
+
+
+        // Parse long number
         strncpy(id, long_number, 3);
         id[3] = '\0';
         int id_int = atoi(id);
@@ -192,10 +212,22 @@ void import_data() {
         pe_grade[4] = '\0';
         float pe_grade_float    = atoi(pe_grade) / 100.0f;
 
+        // Create student
         add_student(first_name, last_name, id_int,
                     math_grade_float, music_grade_float, pe_grade_float);
 
-        first_name = strtok(NULL, "#");
+
+        // Move the copied string pointer up to chop the recently created
+        // student off of the input string
+        copied_string_ptr += characters_traveled;
+
+        // Copy input stirng with chopped copied string
+        strcpy(input_string, copied_string_ptr);
+
+        // Repeat cycle
+        first_name = strtok(input_string, "#");
+        characters_traveled = strlen(input_string) + 1;
+
     }
 }
 
